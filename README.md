@@ -4,6 +4,11 @@ StudyLens is a study tracking and productivity app — track subjects, run focus
 
 This repository combines the frontend and backend into a single repo for easier development.
 
+
+## Live App
+
+ https://studylens-frontend-omega.vercel.app
+
 ## Structure
 
 ```
