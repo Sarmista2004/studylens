@@ -66,7 +66,7 @@ function Sidebar() {
   return (
     <div className="w-64 min-h-screen bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-slate-800 p-6 flex flex-col transition-colors">
       <div className="flex items-center gap-2 mb-10">
-       <img src={logoIcon} alt="" className="w-6 h-6" />
+       <img src={logoIcon} alt="" className="w-10 h-10" />
        <h1 className="text-2xl font-bold text-purple-600">StudyLens</h1>
     </div>
 
