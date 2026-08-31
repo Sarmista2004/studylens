@@ -68,7 +68,7 @@ function SubjectCard({ subject, onUpdate, onDelete }) {
         <>
           <h2 className="text-2xl font-bold dark:text-white">{subject.name}</h2>
 
-          <p className="mt-3 text-gray-700 dark:text-gray-300">Daily Goal : {subject.goal} hrs</p>
+          <p className="mt-3 text-gray-700 dark:text-gray-300"> Goal : {subject.goal} hrs</p>
           <p className="text-gray-700 dark:text-gray-300">Progress : {Math.round(subject.progress)} mins</p>
 
           <div className="w-full h-3 bg-gray-200 dark:bg-slate-800 rounded-full mt-4">
