@@ -45,7 +45,9 @@ export const api = {
   getSessions: () => request("/sessions"),
   addSession: (subject, date, minutes) =>
     request("/sessions", { method: "POST", body: { subject, date, minutes } }),
-
+  completeFocusSession: (subject, date, minutes, subjectId) =>
+    request("/sessions/complete", { method: "POST", body: { subject, date, minutes, subjectId } }),
+  
   getEvents: () => request("/events"),
   addEvent: (data) => request("/events", { method: "POST", body: data }),
   deleteEvent: (id) => request(`/events/${id}`, { method: "DELETE" }),

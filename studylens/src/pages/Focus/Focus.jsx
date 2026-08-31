@@ -31,6 +31,7 @@ function Focus() {
 
   const [background, setBackground] = useState(BACKGROUNDS[0].id);
   const [justCompleted, setJustCompleted] = useState(false);
+  const [saveError, setSaveError] = useState(false);
 
   const intervalRef = useRef(null);
   // Refs mirror state so the setInterval callback always sees the
@@ -67,26 +68,20 @@ function Focus() {
     const now = new Date(); const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 
     try {
-      // record a dated session entry — this is what Analytics/AI
-      // Insights/Planner's calendar all read from
-      await api.addSession(currentSubjectName, today, earnedMinutes);
-
-      // bump the subject's cumulative progress
-      if (currentSubject) {
-        await api.updateSubject(currentSubject.id, {
-          progress: (currentSubject.progress || 0) + earnedMinutes,
-        });
-      }
-
-      // log it for the Dashboard's recent activity feed
-      await api.logActivity(
-        `Completed a ${earnedMinutes} min focus session in ${currentSubjectName}`
+      // one transactional call — session save + progress update + activity log
+      // all succeed together or all roll back together
+      await api.completeFocusSession(
+        currentSubjectName,
+        today,
+        earnedMinutes,
+        currentSubject?.id
       );
+      setSaveError(false);
+      setJustCompleted(true);
     } catch (err) {
       console.error("Failed to save focus session:", err);
+      setSaveError(true);
     }
-
-    setJustCompleted(true);
   };
 
   useEffect(() => {
@@ -184,6 +179,12 @@ function Focus() {
         {justCompleted && (
           <div className="px-5 py-2 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-300">
             +{totalSeconds / 60} min added to {subject}
+          </div>
+        )}
+
+        {saveError && (
+          <div className="px-5 py-2 rounded-full bg-red-500/15 border border-red-500/40 text-red-300">
+            Couldn't save your session — check your connection and try again.
           </div>
         )}
 
