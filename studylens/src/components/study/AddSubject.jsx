@@ -41,6 +41,8 @@ function AddSubject({ onAdd }) {
         <input
           type="number"
           placeholder="Daily Goal (Hours)"
+          min="1"
+          step="1"
           value={goal}
           onChange={(e)=>setGoal(e.target.value)}
           className="border border-gray-300 dark:border-slate-700 bg-transparent dark:text-white rounded-lg px-4 py-3 placeholder:text-gray-400 dark:placeholder:text-gray-500"
