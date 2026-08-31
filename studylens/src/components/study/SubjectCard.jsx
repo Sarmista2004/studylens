@@ -40,6 +40,8 @@ function SubjectCard({ subject, onUpdate, onDelete }) {
 
           <input
             type="number"
+            min="1"
+            step="1"
             value={goal}
             onChange={(e) => setGoal(e.target.value)}
             className="border border-gray-300 dark:border-slate-700 bg-transparent dark:text-white rounded-lg p-2 w-full mt-3"
