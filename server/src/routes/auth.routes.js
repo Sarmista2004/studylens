@@ -11,6 +11,9 @@ router.post("/register", async (req, res) => {
   if (!name || !email || !password) {
     return res.status(400).json({ error: "Missing fields" });
   }
+  if (password.length < 6) {                                    // ← ADD THIS
+    return res.status(400).json({ error: "Password must be at least 6 characters" });  // ← ADD THIS
+  }
 
   try {
     const [existing] = await pool.query("SELECT id FROM users WHERE email = ?", [email]);

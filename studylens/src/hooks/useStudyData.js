@@ -168,7 +168,7 @@ function useStudyData() {
       const subjSessions = sessions.filter((s) => s.subject === subj.name);
       const lastSession = subjSessions.map((s) => s.date).sort().pop();
       const daysSinceLast = lastSession
-        ? Math.round((today - new Date(lastSession)) / 86400000)
+        ? Math.round((new Date(todayStr) - new Date(lastSession)) / 86400000)
         : null;
 
       const goalMinutes = (subj.goal || 0) * 60;

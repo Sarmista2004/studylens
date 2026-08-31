@@ -15,6 +15,11 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
+    if (password.length < 6) {                              // ← ADD THIS
+    setError("Password must be at least 6 characters");    // ← ADD THIS
+    return;                                                 // ← ADD THIS
+    }    
     setLoading(true);
 
     try {
