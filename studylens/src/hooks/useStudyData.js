@@ -165,7 +165,9 @@ function useStudyData() {
     );
 
     const subjectStatus = subjects.map((subj) => {
-      const subjSessions = sessions.filter((s) => s.subject === subj.name);
+      const subjSessions = sessions.filter((s) =>
+        s.subject_id ? s.subject_id === subj.id : s.subject === subj.name
+      );
       const lastSession = subjSessions.map((s) => s.date).sort().pop();
       const daysSinceLast = lastSession
         ? Math.round((new Date(todayStr) - new Date(lastSession)) / 86400000)
@@ -190,7 +192,9 @@ function useStudyData() {
     });
 
     const subjectOverview = subjects.map((subj) => {
-      const subjSessions = sessions.filter((s) => s.subject === subj.name);
+      const subjSessions = sessions.filter((s) =>
+        s.subject_id ? s.subject_id === subj.id : s.subject === subj.name
+      );
       const totalMin = subjSessions.reduce((sum, s) => sum + s.minutes, 0);
       const count = subjSessions.length;
       const avgMin = count > 0 ? Math.round(totalMin / count) : 0;

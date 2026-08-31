@@ -53,8 +53,8 @@ router.post("/complete", async (req, res) => {
     await connection.beginTransaction();
 
     const [result] = await connection.query(
-      "INSERT INTO sessions (user_id, subject, date, minutes) VALUES (?, ?, ?, ?)",
-      [req.userId, subject, date, minutesNum]
+      "INSERT INTO sessions (user_id, subject, subject_id, date, minutes) VALUES (?, ?, ?, ?, ?)",
+      [req.userId, subject, subjectId || null, date, minutesNum]
     );
 
     if (subjectId) {
